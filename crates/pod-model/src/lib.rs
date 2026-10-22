@@ -1,0 +1,31 @@
+//! Tipos e regras puras do Pod. Sem Win32, COM ou filesystem.
+
+pub mod a11y;
+pub mod convert;
+pub mod geometry;
+pub mod habits;
+pub mod holidays;
+pub mod github;
+pub mod grid;
+pub mod ids;
+pub mod image;
+pub mod launcher;
+pub mod layout;
+pub mod media;
+pub mod local;
+pub mod metrics;
+pub mod net;
+pub mod news;
+pub mod notifications;
+pub mod placement;
+pub mod quotes;
+pub mod schema;
+pub mod search;
+pub mod shared;
+pub mod shape;
+pub mod time;
+pub mod timekeeping;
+pub mod usage;
+pub mod view;
+pub mod worldclock;
+pub mod widget;

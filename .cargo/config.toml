@@ -1,0 +1,4 @@
+# CRT estático: o executável não depende do pacote redistribuível do Visual C++ (vcruntime140.dll),
+# que não vem com o Windows. A UCRT (api-ms-win-crt-*) já faz parte do Windows 10 e 11.
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static", "-C", "link-arg=/Brepro"]

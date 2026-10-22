@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = ["crates/pod-model", "crates/pod-app"]
+
+[workspace.package]
+edition = "2021"
+version = "1.0.0"
+license = "MIT"
+publish = false
+
+# Build de distribuição: pequena e determinística. `panic = "abort"`: um pânico dentro de um
+# callback do Win32/COM não pode atravessar o FFI. `strip = "symbols"` remove também o caminho do
+# PDB do binário. A reprodutibilidade completa (caminhos, /Brepro) é feita por tools/package.ps1.
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
+debug = false

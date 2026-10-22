@@ -1,0 +1,14 @@
+# build e pacotes (o pacote vai para os Releases, não para o repositório)
+/target
+/target-perf
+/dist
+
+# editores, sistema e restos de teste
+.vscode/
+.idea/
+.claude/
+Thumbs.db
+desktop.ini
+*.log
+*.tmp
+*.orig
