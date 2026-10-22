@@ -1,81 +1,132 @@
-# POD
+<p align="center"><img src="assets/brand/logo.png" width="120" alt="Pod"></p>
+
+<h1 align="center">Pod</h1>
+
+<p align="center">
+  Widgets nativos para a área de trabalho do Windows, escritos em Rust.<br>
+  Cartões e notas atrás dos seus aplicativos, que voltam como estavam depois de reiniciar.
+</p>
+
+<p align="center">
+  <img alt="Windows 11" src="https://img.shields.io/badge/Windows-11-0078D4?logo=windows&logoColor=white">
+  <img alt="Rust" src="https://img.shields.io/badge/Rust-2021-DEA584?logo=rust&logoColor=black">
+  <img alt="Direct2D" src="https://img.shields.io/badge/Direct2D-DirectComposition-5E5E5E">
+  <img alt="Versão" src="https://img.shields.io/badge/vers%C3%A3o-1.0.0-2ea44f">
+  <img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-blue">
+</p>
 
 > Finally, a name that actually tells you what it is.
 
-Widgets nativos para a área de trabalho do Windows, em Rust: cartões (relógio, calendário, lembretes, timers, métricas do
-sistema, música, clima e outros) e notas de texto, que ficam atrás dos seus aplicativos e voltam como estavam depois de
-reiniciar. Sem Electron, sem WebView, sem conta e sem telemetria.
+<p align="center"><img src="docs/screenshots/widgets-dark.png" alt="Cartões do Pod no tema escuro" width="880"></p>
 
-[![CI](https://github.com/4TyllaL/Pod/actions/workflows/ci.yml/badge.svg)](https://github.com/4TyllaL/Pod/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/4TyllaL/Pod)](https://github.com/4TyllaL/Pod/releases/latest) [![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-blue)](LICENSE)
+<p align="center"><sub>Cartões reais do motor, renderizados offscreen com dados de demonstração (<code>Pod.exe --gallery</code>). Também há o <a href="docs/screenshots/widgets-light.png">tema claro</a>.</sub></p>
 
-**Versão 1.0.0** · Windows 11 x64 · pacote sem assinatura digital.
+## Destaques
 
-### [⬇ Baixar a última versão](https://github.com/4TyllaL/Pod/releases/latest)
+- **Camada de área de trabalho.** Os cartões ficam sempre atrás dos aplicativos e não roubam o foco ao clicar; arrastam e encaixam numa grade, e redimensionam pelas bordas.
+- **Quase 40 widgets.** Relógio, calendário, sistema (anéis concêntricos), música, clima, timers, lembretes e mais, além de notas de texto.
+- **Visual estilo macOS.** Material liso, cantos arredondados, tema claro/escuro/alto contraste, capa de música tingindo o cartão e vidro translúcido opcional.
+- **Modo de edição.** Galeria na base da tela (por categoria; clique ou arraste), selos "−" para remover, espaços "+" tracejados para escolher o lugar e "Restaurar padrão" com confirmação.
+- **Menu da bandeja próprio.** Cantos arredondados, ícones e submenus; em **Ajustes**: iniciar com o Windows, modo desempenho, vidro e widgets de internet.
+- **Leve por padrão.** Esconde os cartões sob apps em tela cheia (modo desempenho) e só pede o que o widget precisa.
+- **Persistência segura.** Gravação atômica com geração anterior, recuperação automática e arquivo preservado em `recovery`.
+- **Privado.** Sem conta, sem telemetria. Widgets de internet (Clima, Notícias, GitHub, Bolsa) ficam **desligados** até você ligar.
 
-Baixe o `Pod.exe` e abra (portátil, não precisa instalar) ou o ZIP com instalador. Detalhes em [Instalar](#instalar).
+## Instalação
 
-> **Leia antes de usar:** esta V1 **não foi validada para acessibilidade** (leitores de tela como o Narrator, foco de teclado
-> nos cartões, método de entrada/IME) e foi testada só em Windows 11, numa máquina de desenvolvimento. A lista completa está
-> em [Limitações conhecidas](#limitações-conhecidas).
-
-## O que tem
-
-- **Cartões de grade** em vários tamanhos (1×1 a 4×4, conforme o widget), com arrastar, encaixe na grade e redimensionar
-  pelas bordas. Quase 40 tipos: Relógio, Progresso do tempo, Calendário, Contagem regressiva, Lembretes, Água, Conversor,
-  Favoritos, Encomendas, Timer, Cronômetro, Pomodoro, Processador, Memória, Disco, Bateria, **Sistema** (anéis), Rede, Música,
-  Notificações, Uso do Claude, Hábitos, Feriados, Agenda, Atalhos, Hora no mundo, Downloads, Capturas de tela e Área de
-  transferência; e, **só se você ligar "Widgets de internet"**, Clima, Notícias, GitHub e Bolsa.
-- **Notas** de texto simples, com posição, tamanho e conteúdo persistidos.
-- **Camada de área de trabalho:** os widgets ficam sempre atrás dos aplicativos e não roubam o foco ao clicar.
-- **Modo de edição** (bandeja → Editar widgets): galeria na base da tela (por categoria; clique ou arraste para adicionar), selos "−" para remover, espaços "+" tracejados para escolher o lugar e "Restaurar padrão" (pede confirmação; não apaga notas).
-- **Temas** claro e escuro (seguem o Windows) e alto contraste; **vidro** translúcido opcional.
-- **Persistência segura:** gravação atômica com geração anterior, recuperação automática e arquivo preservado em `recovery`.
-- Na primeira execução aparecem 3 widgets (Relógio, Calendário e Sistema).
-
-## Instalar
-
-Baixe o pacote `Pod-1.0.0-win-x64.zip`, extraia e rode, no PowerShell da pasta extraída:
+Baixe o `Pod.exe` (portátil, é só abrir) ou o ZIP com instalador na página de [Releases](../../releases/latest).
 
 ```powershell
+# ZIP: extraia e, no PowerShell da pasta extraída:
 powershell -ExecutionPolicy Bypass -File .\install.ps1 -Launch
 ```
 
-Instala para o seu usuário (sem administrador) em `%LOCALAPPDATA%\Programs\Pod`, cria o atalho no Menu Iniciar e **não** inicia
-com o Windows (use `-Autostart` se quiser). Atualizar: `install.ps1 -CloseRunning`. Desinstalar: `uninstall.ps1` (preserva seus
-dados; `-RemoveData` apaga). Detalhes e privacidade no `README.txt` do pacote.
+Instala para o seu usuário (sem administrador) em `%LOCALAPPDATA%\Programs\Pod`, cria o atalho no Menu Iniciar e **não** inicia com o Windows (use `-Autostart`, ou ligue em Ajustes no menu da bandeja). Atualizar: `install.ps1 -CloseRunning`. Desinstalar: `uninstall.ps1` (preserva seus dados; `-RemoveData` apaga). Sem instalar: `Pod.exe --data-dir "D:\MeusDadosDoPod"`.
 
-Sem instalar: `Pod.exe --data-dir "D:\MeusDadosDoPod"`.
+**Requisitos:** Windows 11, 64 bits. O pacote **não é assinado**: o SmartScreen pode avisar ("Mais informações" → "Executar assim mesmo"); confira o hash em `SHA256SUMS.txt`.
 
-## Compilar e testar
+> **Leia antes de usar:** esta V1 **não foi validada para acessibilidade** (Narrator e outros leitores de tela, foco de teclado nos cartões, IME) e foi testada só em Windows 11, numa máquina de desenvolvimento. Veja [Limitações](#limitações-conhecidas).
 
-Requisitos: Windows, o toolchain fixado em `rust-toolchain.toml` (MSVC) e o Windows SDK (o `rc.exe` compila ícone e manifesto).
+## Compilar
+
+Requer a toolchain **MSVC** (fixada em `rust-toolchain.toml`) e o Windows SDK (o `rc.exe` compila ícone e manifesto).
 
 ```powershell
-cargo test                                   # suíte completa (app e modelo)
-cargo build --release                        # build de produção
+cargo run                                   # abre os cartões com ícone na bandeja
+cargo build --release                       # binário otimizado
+cargo test                                  # suíte completa (app e modelo)
+
 powershell -ExecutionPolicy Bypass -File tools\package.ps1   # testes + release determinística + ZIP em dist\
 ```
 
-Os modos de prova e diagnóstico (`--shadow-*`, `--focus-card`) só existem em builds de **debug**; o executável de distribuição não
-os contém. Os scripts em `tools/verify-*.ps1` rodam o app real com dados isolados (`--data-dir`) e **movem o cursor e enviam
-teclas de verdade**: não os rode com a sua tela em uso.
+Flags: `--data-dir <pasta>` (dados isolados) e `--gallery <pasta>` (renderiza cada widget × tamanho × tema em PNG, usado como regressão visual). Os modos de prova e diagnóstico (`--shadow-*`, `--focus-card`) só existem em builds de **debug**.
+
+Os scripts `tools/verify-*.ps1` rodam o app real com dados isolados e **movem o cursor e enviam teclas de verdade**: não os rode com a sua tela em uso.
+
+## Catálogo
+
+| Categoria | Widgets |
+| --- | --- |
+| Tempo | Relógio, Progresso do tempo, Calendário, Contagem regressiva, Timer, Cronômetro, Pomodoro, Hora no mundo, Feriados |
+| Produtividade | Lembretes, Hábitos, Agenda, Atalhos, Favoritos, Encomendas, Conversor, Água |
+| Sistema | Sistema (anéis), Processador, Memória, Disco, Bateria, Rede, Música, Notificações, Uso do Claude, Área de transferência |
+| Arquivos | Downloads, Capturas de tela |
+| Internet (opt-in) | Clima, Notícias, GitHub, Bolsa |
+
+Mais as **notas** de texto simples. Cada widget tem formatos de 1×1 a 4×4, conforme o tipo.
+
+## Estrutura do repositório
+
+| Pasta | Conteúdo |
+| --- | --- |
+| `crates/pod-model/` | Modelo puro e testável: View/Node/Kind, layout, grade, formas, esquema de persistência, serviços (clima, notícias, GitHub, mídia...) |
+| `crates/pod-app/` | O app Windows: host Win32, render Direct2D, runtime de widgets, bandeja, menu, galeria de edição |
+| `assets/` | Ícone e marca |
+| `docs/` | Arquitetura, direção visual, ADRs e relatórios de validação |
+| `tools/` | Empacotamento, instalador, verificações no app real e geração das imagens |
+| `.github/workflows/` | CI |
+
+### Módulos de `crates/pod-app/src/`
+
+| Módulo | Papel |
+| --- | --- |
+| `main.rs`, `host.rs`, `shell.rs` | Ponto de entrada, janelas dos cartões e notas (camada de desktop) e o orquestrador (instâncias, monitores, edição) |
+| `render.rs`, `gfx.rs`, `icons.rs`, `text.rs` | Desenho Direct2D/DirectWrite/DirectComposition, ícones vetoriais e texto |
+| `ui/` | Tema, animação, modo de teclado e notas |
+| `widgets/` | Um arquivo por widget |
+| `runtime/` | Ciclo de vida, prazos e comandos dos widgets |
+| `storage/` | Persistência atômica, recuperação e preferências |
+| `tray.rs`, `menu.rs`, `autostart.rs` | Ícone da bandeja, menu próprio e iniciar com o Windows |
+| `dock.rs`, `slot.rs`, `edit.rs`, `gallery.rs` | Galeria da base, espaços "+", Pod Studio (vitrine) e galeria offscreen |
+| `a11y.rs`, `monitors.rs` | UI Automation e topologia de monitores/DPI |
 
 ## Documentação
 
-- [Arquitetura](docs/ARCHITECTURE.md) (baseline histórico), [decisões](docs/decisions/) e [direção visual](docs/DESIGN.md).
-- [Validações e limites de cada marco](docs/validation/): leia os limites antes de considerar um cenário comprovado.
-- [Notas da V1](docs/validation/v1-release.md): o que foi verificado, o que não foi e o que fica para depois.
+| Assunto | Documento |
+| --- | --- |
+| Índice | [docs/README.md](docs/README.md) |
+| Arquitetura (baseline histórico) | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
+| Direção visual | [docs/DESIGN.md](docs/DESIGN.md) |
+| Decisões (ADRs) | [docs/decisions/](docs/decisions/) |
+| Vidro e sombra ampla (estudo) | [ADR-0005](docs/decisions/0005-glass-default-and-wide-shadow.md) |
+| Validações e limites de cada marco | [docs/validation/](docs/validation/) |
+| Notas de verificação da V1 | [docs/validation/v1-release.md](docs/validation/v1-release.md) |
+
+## Releases
+
+- **Local:** `tools\package.ps1` roda os testes, compila com `--locked` (CRT estática, `/Brepro`) e monta `dist\Pod-X.Y.Z-win-x64.zip` com `Pod.exe`, instalador/desinstalador, licenças de terceiros e checksums. `tools\verify-package.ps1` instala, abre com dados novos, atualiza e desinstala em pastas de teste.
+- **Publicar:** crie a tag `vX.Y.Z` e anexe o `Pod.exe`, o ZIP e o `.sha256` à release.
+- **CI:** testes e build de release a cada push e pull request.
 
 ## Limitações conhecidas
 
-- **Acessibilidade não validada:** Narrator e outros leitores de tela, IME e foco de teclado nos cartões (não há como pôr o foco do
-  teclado num cartão; os botões respondem ao UI Automation `Invoke`).
-- Testado só em Windows 11 na máquina de desenvolvimento: **não** em Windows 10, **não** em máquina virtual limpa, **não** com
-  monitores de escalas (DPI) diferentes.
-- Pacote **não assinado** (o SmartScreen pode avisar); instalador em PowerShell, não MSI.
-- Emoji restaurado de uma nota pode aparecer como caixa; vidro não desfoca o fundo; sombra dos cartões é a curta do Windows
-  (a sombra ampla foi estudada e **não** entrou: ver [ADR-0005](docs/decisions/0005-glass-default-and-wide-shadow.md)).
+- **Acessibilidade não validada:** Narrator e outros leitores de tela, IME e foco de teclado nos cartões (não há como pôr o foco do teclado num cartão; os botões respondem ao UI Automation `Invoke`).
+- Testado só em Windows 11 na máquina de desenvolvimento: **não** em Windows 10, **não** em máquina virtual limpa, **não** com monitores de escalas (DPI) diferentes.
+- Pacote **não assinado**; instalador em PowerShell, não MSI.
+- Emoji restaurado de uma nota pode aparecer como caixa; vidro não desfoca o fundo; a sombra dos cartões é a curta do Windows (a sombra ampla foi estudada e **não** entrou).
 - Fora da V1: chat de IA, cenas/mascote e atualização automática.
+
+Histórico de versões em [CHANGELOG.md](CHANGELOG.md).
 
 ## Licença
 
